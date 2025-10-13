@@ -1,6 +1,8 @@
-import google.generativeai as genai
+"""This takes in an image when run in terminal and uses it as context for every message sent
+e.g. python3 multimodal.py <path/to/image>"""
 import os
 import sys
+import google.generativeai as genai
 import PIL.Image
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
