@@ -1,6 +1,7 @@
 "Emulates a chat with AI, stores and highly compresses context"
 import google.generativeai as genai
 import os
+import sys
 import datetime
 import json
 import random
@@ -9,7 +10,13 @@ cache:dict[str,str] = {
     "current_time":datetime.datetime.now().strftime('%m/%d/%Y'),
     "name":"unknown"
 }
-genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+
+try:
+    API_KEY = os.environ["GOOGLE_API_KEY"]
+except:
+    sys.exit("Error: GOOGLE_API_KEY environment variable not set. Add to environment variables or replace line 15 with hard coded API_KEY")
+    
+genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel(
     'gemini-2.5-flash',
     system_instruction="""
